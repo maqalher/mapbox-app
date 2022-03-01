@@ -1,0 +1,93 @@
+generar modulo maps
+  ng g m maps
+
+componente mapScreen
+  ng g c maps/screen/mapScreen --skip-Tests
+
+maps.module.ts
+exports: [
+    MapScreenComponent
+  ]
+
+
+main.ts  preguntar la geolocation
+  if(!navigator.geolocation){
+    alert('Navegador no soporta la Geolocation');
+    throw new Error('Navegador no soporta la Geolocation');
+  }
+
+
+crear servicio places
+  ng g s maps/services/places --skip-Tests
+
+
+componente mapView y loading
+  ng g c maps/components/mapView --skip-tests
+  ng g c maps/components/loading --skip-tests
+
+
+add mapbox
+  npm install --save mapbox-gl
+
+  estilos index.html
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+
+
+main.ts
+  import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+
+  mapboxgl.accessToken = 'pk.eyJ1IjoibWFxYWxoZXIiLCJhIjoiY2wwM2ludnBhMWR5NjNibWxjb2gwdGwyYSJ9.JxgD6N5vYbPHAJegJ0Z2Pg';
+
+mapbox para ts
+  npm i --save-dev @types/mapbox-gl
+
+  tsconfig.json
+    "allowSyntheticDefaultImports": true,
+
+    se cambio la M(mapboxgl) => Mapboxgl
+
+componente boton y logo
+  ng g c maps/components/btnMyLocation --skip-tests
+  ng g c maps/components/angularLogo --skip-tests
+
+
+servicio map
+  ng g s maps/services/map --skip-Tests
+
+
+componente searchBar searchResults
+  ng g c maps/components/searchBar --skip-tests
+  ng g c maps/components/searchResults --skip-Tests
+
+
+private debounceTimer?: NodeJS.Timeout de searchBar-component
+  tsconfig.app.json
+    "types": [
+      "node"
+    ]
+
+  tsconfig.json
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "types": [
+      "node"
+    ]
+
+
+crear carpeta interfaces
+  places.ts
+
+
+agregar apiKey en environtments
+
+crear dentro de maps la carpeta api
+  api
+    palcesApiClient.ts
+
+crear interface directions.ts
+
+Error al hacer build 
+  cambiar propiedades de angular.json
+    "maximumError": "3mb"
